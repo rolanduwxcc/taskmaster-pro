@@ -145,7 +145,11 @@ $(".list-group").on("click", "span", function() {
     minDate: -10,
     gotoCurrrent: true,
     showButtonPanel: true,
-    showAnim: "fade"
+    showAnim: "fade",
+    onClose: function() {
+      //when calendar is closed force a change event on the dateInput
+      $(this).trigger("change");
+    }
   })
 
   //automatically focus on new element
