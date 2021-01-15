@@ -79,7 +79,7 @@ $("#task-form-modal .btn-primary").click(function() {
   }
 });
 
-//--------------------------------------------------------task text/p was clicked turned to textarea
+//-----------------------------------------------------task text/p was clicked turned to textarea
 $(".list-group").on("click", "p", function() {
   var text = $(this)
     .text()
@@ -129,8 +129,7 @@ $(".list-group").on("blur", "textarea", function() {
 //--------------------------------------------------------task date is clicked
 $(".list-group").on("click", "span", function() {
   //get current date text
-  var taskDate = $(this)
-    .text();
+  var taskDate = $(this).text().trim();
 
   //create new input element
   var dateInput = $("<input>")
@@ -141,12 +140,20 @@ $(".list-group").on("click", "span", function() {
   //swap out elements
   $(this).replaceWith(dateInput);
 
+  //enable jquery ui datepicker
+  dateInput.datepicker({
+    minDate: -10,
+    gotoCurrrent: true,
+    showButtonPanel: true,
+    showAnim: "fade"
+  })
+
   //automatically focus on new element
   dateInput.trigger("focus");
 });
 
 //--------------------------------------------------------blur callback left date field return to normal
-$(".list-group").on("blur", "input[type='text']", function() {
+$(".list-group").on("change", "input[type='text']", function() {
   //get current text
   var taskDate = $(this).val();
 
@@ -239,6 +246,16 @@ $("#trash").droppable({
   }
 });
 
+$("#modalDueDate").datepicker({
+  minDate: -10,
+  gotoCurrrent: true,
+  showButtonPanel: true,
+  showAnim: "fade",
+  // showOn: "both",
+  // buttonImageOnly: true,
+  // buttonImage: "calendar.gif",
+  // buttonText: "Calendar!"
+});
 
 // remove all tasks
 $("#remove-tasks").on("click", function() {
